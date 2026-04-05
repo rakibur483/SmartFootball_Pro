@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "144313333765",
+    "project_id": "smartfootball-app-2026",
+    "storage_bucket": "smartfootball-app-2026.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:144313333765:android:9df1e3cf6115928918046c",
+        "android_client_info": {
+          "package_name": "com.example.smartfootball_pro"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFZzYxTY0P9HY3mtNRpb8H-q5Yru0MmgU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
