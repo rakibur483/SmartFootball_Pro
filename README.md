@@ -1,17 +1,35 @@
-# smartfootball_pro
+# SmartFootball Pro ⚽
 
-A new Flutter project.
+SmartFootball Pro is a Flutter app for football players to track training, monitor progress, and manage profile information.
 
-## Getting Started
+## Features
+- Firebase Authentication
+- User Signup and Login
+- Profile Management
+- Training Progress Tracking
+- Cloud Firestore Database Integration
+- Delete Saved Progress
 
-This project is a starting point for a Flutter application.
+## Tech Stack
+- Flutter
+- Dart
+- Firebase Authentication
+- Cloud Firestore
 
-A few resources to get you started if this is your first Flutter project:
+## Project Structure
+- `lib/screens/` - app screens
+- `lib/widgets/` - reusable widgets
+- `lib/main.dart` - app entry point
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+## Setup
+1. Clone the repository
+2. Run `flutter pub get`
+3. Configure Firebase
+4. Run `flutter run`
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Author
+Rakib
+
+
+## Repository
+[SmartFootball_Pro](https://github.com/rakibur483/SmartFootball_Pro)
