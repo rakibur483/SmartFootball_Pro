@@ -191,6 +191,7 @@ class _EditTrainingScreenState extends State<EditTrainingScreen> {
                 label: 'Steps',
                 maxLines: 4,
               ),
+              //
               buildTextField(
                 controller: videoUrlController,
                 label: 'Video URL (optional)',
