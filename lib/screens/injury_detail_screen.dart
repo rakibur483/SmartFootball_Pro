@@ -1,20 +1,82 @@
 import 'package:flutter/material.dart';
+import '../models/injury_model.dart';
+import '../services/firestore_service.dart';
+import 'edit_injury_screen.dart';
 
 class InjuryDetailScreen extends StatelessWidget {
-  final String title;
-  final String description;
+  final InjuryModel injury;
 
   const InjuryDetailScreen({
     super.key,
-    required this.title,
-    required this.description,
+    required this.injury,
   });
+
+  Future<void> deleteInjury(BuildContext context) async {
+    final bool? confirmDelete = await showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Delete Injury'),
+          content: const Text('Are you sure you want to delete this injury?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context, false);
+              },
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context, true);
+              },
+              child: const Text('Delete'),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (confirmDelete != true) return;
+
+    await FirestoreService().deleteInjury(injury.id);
+
+    if (!context.mounted) return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Injury deleted successfully')),
+    );
+
+    Navigator.pop(context, true);
+  }
+
+  Future<void> openEditScreen(BuildContext context) async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => EditInjuryScreen(injury: injury),
+      ),
+    );
+
+    if (result == true && context.mounted) {
+      Navigator.pop(context, true);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(injury.title),
+        actions: [
+          IconButton(
+            onPressed: () => openEditScreen(context),
+            icon: const Icon(Icons.edit),
+          ),
+          IconButton(
+            onPressed: () => deleteInjury(context),
+            icon: const Icon(Icons.delete),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -46,7 +108,7 @@ class InjuryDetailScreen extends StatelessWidget {
                   const SizedBox(width: 14),
                   Expanded(
                     child: Text(
-                      title,
+                      injury.title,
                       style: const TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
@@ -57,34 +119,59 @@ class InjuryDetailScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
+            Text(
+              'Category: ${injury.category}',
+              style: const TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Body Part: ${injury.bodyPart}',
+              style: const TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 24),
             const Text(
-              'Overview',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+              'Description',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             Text(
-              description,
+              injury.description,
               style: const TextStyle(fontSize: 16, height: 1.5),
             ),
             const SizedBox(height: 24),
             const Text(
-              'Recovery Tips',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+              'Symptoms',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
+            Text(
+              injury.symptoms,
+              style: const TextStyle(fontSize: 16, height: 1.5),
+            ),
+            const SizedBox(height: 24),
             const Text(
-              '• Warm up properly before training.\n'
-              '• Avoid sudden overloading of muscles.\n'
-              '• Stretch after sessions.\n'
-              '• Rest if pain increases.\n'
-              '• Seek expert medical advice for serious injury.',
-              style: TextStyle(fontSize: 16, height: 1.6),
+              'Causes',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              injury.causes,
+              style: const TextStyle(fontSize: 16, height: 1.5),
+            ),
+            const SizedBox(height: 24),
+            Text(
+              'Recovery Time: ${injury.recoveryTime}',
+              style: const TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 24),
+            const Text(
+              'Prevention Tips',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              injury.preventionTips,
+              style: const TextStyle(fontSize: 16, height: 1.6),
             ),
           ],
         ),
