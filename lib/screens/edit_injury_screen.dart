@@ -183,6 +183,7 @@ class _EditInjuryScreenState extends State<EditInjuryScreen> {
                 label: 'Image URL (optional)',
                 requiredField: false,
               ),
+              //
               const SizedBox(height: 8),
               SizedBox(
                 width: double.infinity,

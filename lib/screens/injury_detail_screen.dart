@@ -153,6 +153,7 @@ class InjuryDetailScreen extends StatelessWidget {
               'Causes',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
+            //
             const SizedBox(height: 10),
             Text(
               injury.causes,
