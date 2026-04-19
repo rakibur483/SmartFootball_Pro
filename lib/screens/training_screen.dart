@@ -1,3 +1,4 @@
+// Training detail screen updated by Hasibul (Member 2)
 import 'package:flutter/material.dart';
 import '../models/training_model.dart';
 import '../services/firestore_service.dart';
